@@ -9,7 +9,10 @@ cmake ^
     -G "Ninja" ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DCMAKE_BUILD_TYPE=Release ^
-    -DBUILD_TESTING:BOOL=OFF ^
+    -DBUILD_TESTING:BOOL=ON ^
+    -DZENOHCXX_ZENOHC:BOOL=ON ^
+    -DZENOHCXX_ZENOHPICO:BOOL=OFF ^
+    -DZENOHCXX_EXAMPLES_PROTOBUF:BOOL=OFF ^
     %SRC_DIR%
 if errorlevel 1 exit 1
 
@@ -19,4 +22,8 @@ if errorlevel 1 exit 1
 
 :: Install.
 cmake --build . --config Release --target install
+if errorlevel 1 exit 1
+
+:: Test.
+ctest --output-on-failure -C Release
 if errorlevel 1 exit 1
