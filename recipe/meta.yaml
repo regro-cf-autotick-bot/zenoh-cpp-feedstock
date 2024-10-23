@@ -27,9 +27,7 @@ test:
   commands:
     - test -f ${PREFIX}/include/zenoh.hxx  # [unix]
     - if not exist %LIBRARY_PREFIX%\\include\\zenoh.hxx exit 1  # [win]
-    # --disable-double-find passed as a workaround for https://github.com/eclipse-zenoh/zenoh-cpp/pull/232
-    # We need to first call find_package(zenohc) otherwise zenohcxx::zenohc::lib is not defined
-    - cmake-package-check zenohc zenohcxx --targets zenohcxx zenohcxx::zenohc::lib --disable-double-find
+    - cmake-package-check zenohc zenohcxx --targets zenohcxx zenohcxx::zenohc
   requires:
     - cmake-package-check
     - {{ compiler('c') }}
