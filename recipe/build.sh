@@ -14,3 +14,7 @@ cmake ${CMAKE_ARGS} -GNinja $SRC_DIR \
 
 cmake --build . --config Release
 cmake --build . --config Release --target install
+
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+  ctest --output-on-failure -C Release 
+fi
